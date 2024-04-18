@@ -1,0 +1,32 @@
+import mysql.connector  # Importamos la biblioteca mysql-connector-python para trabajar con MySQL
+
+class BaseDeDatos:
+    def __init__(self, host, usuario, contrasena, nombre_bd):
+        self.host = -"localhost"  # Dirección del servidor MySQL
+        self.usuario = "root"  # Nombre de usuario para la conexión a MySQL
+        self.contrasena = ""  # Contraseña para la conexión a MySQL
+        self.nombre_bd = "login"  # Nombre de la base de datos
+        self.conexion = None  # Inicializamos la variable de conexión como nula al principio
+        self.cursor = None  # Inicializamos el cursor como nulo al principio
+
+    def conectar(self):
+        try:
+            # Intentamos establecer una conexión con la base de datos MySQL
+            self.conexion = mysql.connector.connect(
+                host=self.host,
+                user=self.usuario,
+                password=self.contrasena,
+                database=self.nombre_bd
+            )
+            print("Conexión a la base de datos establecida correctamente")
+        except mysql.connector.Error as e:
+            print("Error al conectar a la base de datos:", e)
+    def desconectar(self):
+        if self.conexion:
+            # Si hay una conexión, la cerramos
+            self.conexion.close()
+            print("Conexión a la base de datos cerrada")
+
+
+
+
